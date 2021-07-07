@@ -6,4 +6,16 @@
 //  Copyright © 2021 ekireev. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+enum SearchAssembly {
+    static func make() -> SearchViewController {
+        let viewController = SearchViewController()
+        let presenter = SearchPresenter()
+        
+        viewController.output = presenter
+        presenter.view = viewController
+        
+        return viewController
+    }
+}

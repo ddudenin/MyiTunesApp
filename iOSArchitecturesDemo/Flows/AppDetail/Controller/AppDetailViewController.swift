@@ -12,6 +12,7 @@ final class AppDetailViewController: UIViewController {
     
     public var app: ITunesApp!
     lazy var headerViewController = AppDetailHeaderViewController(app: app)
+    lazy var whatsNewViewController = AppWhatsNewViewController(app: app)
     
     // MARK: - Lifecycle
 
@@ -52,12 +53,10 @@ final class AppDetailViewController: UIViewController {
     
     private func addDescriptionViewController() {
         // ДЗ, сделать свой контроллер
-        let descriptionViewController = UIViewController()
-        
-        self.addChild(descriptionViewController)
-        let descriptionView = descriptionViewController.view!
+        self.addChild(whatsNewViewController)
+        let descriptionView = whatsNewViewController.view!
         self.view.addSubview(descriptionView)
-        descriptionViewController.didMove(toParent: self)
+        whatsNewViewController.didMove(toParent: self)
         
         descriptionView.translatesAutoresizingMaskIntoConstraints = false
         

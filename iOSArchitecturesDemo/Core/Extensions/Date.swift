@@ -1,5 +1,5 @@
 //
-//  Date+Extensions.swift
+//  Date.swift
 //  iOSArchitecturesDemo
 //
 //  Created by Дмитрий Дуденин on 07.07.2021.
@@ -8,13 +8,12 @@
 
 import Foundation
 
-func utcToTimeAgoDisplay(dateString: String) -> String {
+func getTimeAge(from dateString: String) -> String {
     let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
-    dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
-    
+    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+
     let relativeFormatter = RelativeDateTimeFormatter()
-    relativeFormatter.unitsStyle = .full
+    relativeFormatter.unitsStyle = .abbreviated
     
     return relativeFormatter.localizedString(for: dateFormatter.date(from: dateString) ?? Date(timeIntervalSinceNow: 0), relativeTo: Date())
 }
