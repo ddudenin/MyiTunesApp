@@ -10,6 +10,9 @@
 		0A67B61B26962646008D0933 /* AppWhatsNewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A67B61A26962646008D0933 /* AppWhatsNewViewController.swift */; };
 		0A67B61D26962692008D0933 /* AppWhatsNewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A67B61C26962692008D0933 /* AppWhatsNewView.swift */; };
 		0A67B61F26963A9B008D0933 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A67B61E26963A9B008D0933 /* Date.swift */; };
+		0A67B62126964670008D0933 /* TabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A67B62026964670008D0933 /* TabItem.swift */; };
+		0A67B624269648BF008D0933 /* NavigationBaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A67B623269648BF008D0933 /* NavigationBaseController.swift */; };
+		0A67B62626964E45008D0933 /* TabNavigationMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A67B62526964E45008D0933 /* TabNavigationMenu.swift */; };
 		DB30385A2694C1FC005A53AE /* UIPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3038592694C1FC005A53AE /* UIPreviewView.swift */; };
 		DB3038602694C82C005A53AE /* AppDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB30385F2694C82C005A53AE /* AppDetailHeaderView.swift */; };
 		DB3038632694C838005A53AE /* AppDetailHeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3038622694C838005A53AE /* AppDetailHeaderViewController.swift */; };
@@ -41,6 +44,9 @@
 		0A67B61A26962646008D0933 /* AppWhatsNewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppWhatsNewViewController.swift; sourceTree = "<group>"; };
 		0A67B61C26962692008D0933 /* AppWhatsNewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppWhatsNewView.swift; sourceTree = "<group>"; };
 		0A67B61E26963A9B008D0933 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		0A67B62026964670008D0933 /* TabItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabItem.swift; sourceTree = "<group>"; };
+		0A67B623269648BF008D0933 /* NavigationBaseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBaseController.swift; sourceTree = "<group>"; };
+		0A67B62526964E45008D0933 /* TabNavigationMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabNavigationMenu.swift; sourceTree = "<group>"; };
 		8BE349225151AE13B1EDE333 /* Pods-iOSArchitecturesDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSArchitecturesDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iOSArchitecturesDemo/Pods-iOSArchitecturesDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		8EEA6AF9F424A0D5873D2723 /* Pods_iOSArchitecturesDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOSArchitecturesDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A067E149D296BC0C249FD11F /* Pods-iOSArchitecturesDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSArchitecturesDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-iOSArchitecturesDemo/Pods-iOSArchitecturesDemo.release.xcconfig"; sourceTree = "<group>"; };
@@ -107,6 +113,16 @@
 				0A67B61C26962692008D0933 /* AppWhatsNewView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		0A67B622269648B1008D0933 /* NavigationMenu */ = {
+			isa = PBXGroup;
+			children = (
+				0A67B62026964670008D0933 /* TabItem.swift */,
+				0A67B623269648BF008D0933 /* NavigationBaseController.swift */,
+				0A67B62526964E45008D0933 /* TabNavigationMenu.swift */,
+			);
+			path = NavigationMenu;
 			sourceTree = "<group>";
 		};
 		3E03DA2743EDF39A6844C510 /* Pods */ = {
@@ -225,6 +241,7 @@
 		E0E1D2A52034A3560011E01A /* Flows */ = {
 			isa = PBXGroup;
 			children = (
+				0A67B622269648B1008D0933 /* NavigationMenu */,
 				E0E1D2A62034A36C0011E01A /* Search */,
 				E0E1D2A72034A3780011E01A /* AppDetail */,
 			);
@@ -497,6 +514,7 @@
 				DB30386C2694D850005A53AE /* SearchAssembly.swift in Sources */,
 				DB3038632694C838005A53AE /* AppDetailHeaderViewController.swift in Sources */,
 				0A67B61D26962692008D0933 /* AppWhatsNewView.swift in Sources */,
+				0A67B62126964670008D0933 /* TabItem.swift in Sources */,
 				F8A97B352249898E00FB2C0E /* AppCell.swift in Sources */,
 				E0E1D387203AE45F0011E01A /* WebRequest.swift in Sources */,
 				F8A1E03C2248382F00FE6448 /* Monads.swift in Sources */,
@@ -504,10 +522,12 @@
 				DB3038682694D482005A53AE /* SearchViewIO.swift in Sources */,
 				E0E1D3D1203C48D70011E01A /* AppDetailViewController.swift in Sources */,
 				E0E1D358203ADC590011E01A /* NetworkManager.swift in Sources */,
+				0A67B62626964E45008D0933 /* TabNavigationMenu.swift in Sources */,
 				E0E1D39C203AE6420011E01A /* ITunesSong.swift in Sources */,
 				DB30385A2694C1FC005A53AE /* UIPreviewView.swift in Sources */,
 				E0E1D2952034A3350011E01A /* SearchViewController.swift in Sources */,
 				E0E1D39F203AE7400011E01A /* ImageDownloader.swift in Sources */,
+				0A67B624269648BF008D0933 /* NavigationBaseController.swift in Sources */,
 				F8114FBE22A3DBF400102830 /* SearchView.swift in Sources */,
 				0A67B61F26963A9B008D0933 /* Date.swift in Sources */,
 				0A67B61B26962646008D0933 /* AppWhatsNewViewController.swift in Sources */,
