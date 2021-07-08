@@ -19,7 +19,7 @@ final class SearchAppViewController: UIViewController {
     private var searchResults = [ITunesApp]()
     
     private struct Constants {
-        static let reuseIdentifier = "reuseId"
+        static let reuseIdentifier = "AppCell"
     }
     
     var output: SearchAppViewOutput!

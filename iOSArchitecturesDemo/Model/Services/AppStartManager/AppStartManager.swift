@@ -28,7 +28,7 @@ final class AppStartManager {
         musicTab.title = "Music"
         musicTab.image = UIImage(systemName: "music.note.list")
 
-        let musicVC = UIViewController()
+        let musicVC = SearchSongAssembly.make()
         musicVC.tabBarItem = musicTab
         
         let rootVC = UITabBarController()

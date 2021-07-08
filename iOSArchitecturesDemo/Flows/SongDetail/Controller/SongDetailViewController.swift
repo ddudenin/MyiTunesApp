@@ -1,18 +1,18 @@
 //
-//  AppDetailViewController.swift
+//  SongDetailViewController.swift
 //  iOSArchitecturesDemo
 //
-//  Created by ekireev on 20.02.2018.
-//  Copyright © 2018 ekireev. All rights reserved.
+//  Created by Дмитрий Дуденин on 08.07.2021.
+//  Copyright © 2021 ekireev. All rights reserved.
 //
 
 import UIKit
 
-final class AppDetailViewController: UIViewController {
+final class SongDetailViewController: UIViewController {
     
-    public var app: ITunesApp!
-    lazy var headerViewController = AppDetailHeaderViewController(app: app)
-    lazy var whatsNewViewController = AppWhatsNewViewController(app: app)
+    public var song: ITunesSong!
+    lazy var headerViewController = SongDetailHeaderViewController(song: song)
+    //lazy var whatsNewViewController = AppWhatsNewViewController(app: app)
     
     // MARK: - Lifecycle
 
@@ -28,7 +28,7 @@ final class AppDetailViewController: UIViewController {
         self.view.backgroundColor = .systemBackground
         self.configureNavigationController()
         self.addHeaderViewController()
-        self.addDescriptionViewController()
+        //self.addDescriptionViewController()
     }
     
     private func configureNavigationController() {
@@ -51,7 +51,7 @@ final class AppDetailViewController: UIViewController {
         ])
     }
     
-    private func addDescriptionViewController() {
+    /*private func addDescriptionViewController() {
         self.addChild(whatsNewViewController)
         let descriptionView = whatsNewViewController.view!
         self.view.addSubview(descriptionView)
@@ -64,6 +64,6 @@ final class AppDetailViewController: UIViewController {
             descriptionView.leftAnchor.constraint(equalTo: self.view.leftAnchor),
             descriptionView.rightAnchor.constraint(equalTo: self.view.rightAnchor),
         ])
-    }
+    }*/
 
 }
