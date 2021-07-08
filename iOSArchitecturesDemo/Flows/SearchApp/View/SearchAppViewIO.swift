@@ -1,5 +1,5 @@
 //
-//  SearchViewIO.swift
+//  SearchAppViewIO.swift
 //  iOSArchitecturesDemo
 //
 //  Created by v.prusakov on 7/6/21.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol SearchViewInput: AnyObject {
+protocol SearchAppViewInput: AnyObject {
     
     func setSearchApps(_ items: [ITunesApp])
     
@@ -18,7 +18,7 @@ protocol SearchViewInput: AnyObject {
     func hideNoResults()
 }
 
-protocol SearchViewOutput: AnyObject {
+protocol SearchAppViewOutput: AnyObject {
     func viewDidSearch(with queury: String)
     
     func viewDidSelectApp(_ app: ITunesApp)

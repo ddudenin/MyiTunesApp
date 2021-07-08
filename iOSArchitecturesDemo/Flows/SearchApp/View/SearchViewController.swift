@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class SearchViewController: UIViewController {
+final class SearchAppViewController: UIViewController {
     
     // MARK: - Private Properties
     
@@ -22,7 +22,7 @@ final class SearchViewController: UIViewController {
         static let reuseIdentifier = "reuseId"
     }
     
-    var output: SearchViewOutput!
+    var output: SearchAppViewOutput!
     
     // MARK: - Lifecycle
     
@@ -46,9 +46,9 @@ final class SearchViewController: UIViewController {
     
 }
 
-// MARK: - SearchViewInput
+// MARK: - SearchAppViewInput
 
-extension SearchViewController: SearchViewInput {
+extension SearchAppViewController: SearchAppViewInput {
     func throbber(show: Bool) {
         UIApplication.shared.isNetworkActivityIndicatorVisible = show
     }
@@ -78,7 +78,7 @@ extension SearchViewController: SearchViewInput {
 }
 
 //MARK: - UITableViewDataSource
-extension SearchViewController: UITableViewDataSource {
+extension SearchAppViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return searchResults.count
@@ -97,7 +97,7 @@ extension SearchViewController: UITableViewDataSource {
 }
 
 //MARK: - UITableViewDelegate
-extension SearchViewController: UITableViewDelegate {
+extension SearchAppViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
@@ -107,7 +107,7 @@ extension SearchViewController: UITableViewDelegate {
 }
 
 //MARK: - UISearchBarDelegate
-extension SearchViewController: UISearchBarDelegate {
+extension SearchAppViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let query = searchBar.text else {

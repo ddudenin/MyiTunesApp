@@ -13,9 +13,9 @@
 		DB30385A2694C1FC005A53AE /* UIPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3038592694C1FC005A53AE /* UIPreviewView.swift */; };
 		DB3038602694C82C005A53AE /* AppDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB30385F2694C82C005A53AE /* AppDetailHeaderView.swift */; };
 		DB3038632694C838005A53AE /* AppDetailHeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3038622694C838005A53AE /* AppDetailHeaderViewController.swift */; };
-		DB3038662694D44F005A53AE /* SearchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3038652694D44F005A53AE /* SearchPresenter.swift */; };
-		DB3038682694D482005A53AE /* SearchViewIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3038672694D482005A53AE /* SearchViewIO.swift */; };
-		DB30386C2694D850005A53AE /* SearchAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB30386B2694D850005A53AE /* SearchAssembly.swift */; };
+		DB3038662694D44F005A53AE /* SearchAppPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3038652694D44F005A53AE /* SearchAppPresenter.swift */; };
+		DB3038682694D482005A53AE /* SearchAppViewIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3038672694D482005A53AE /* SearchAppViewIO.swift */; };
+		DB30386C2694D850005A53AE /* SearchAppAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB30386B2694D850005A53AE /* SearchAppAssembly.swift */; };
 		E0E1D2932034A3350011E01A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E1D2922034A3350011E01A /* AppDelegate.swift */; };
 		E0E1D2952034A3350011E01A /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E1D2942034A3350011E01A /* SearchViewController.swift */; };
 		E0E1D29A2034A3350011E01A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E0E1D2992034A3350011E01A /* Assets.xcassets */; };
@@ -47,9 +47,9 @@
 		DB3038592694C1FC005A53AE /* UIPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIPreviewView.swift; sourceTree = "<group>"; };
 		DB30385F2694C82C005A53AE /* AppDetailHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDetailHeaderView.swift; sourceTree = "<group>"; };
 		DB3038622694C838005A53AE /* AppDetailHeaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDetailHeaderViewController.swift; sourceTree = "<group>"; };
-		DB3038652694D44F005A53AE /* SearchPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPresenter.swift; sourceTree = "<group>"; };
-		DB3038672694D482005A53AE /* SearchViewIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewIO.swift; sourceTree = "<group>"; };
-		DB30386B2694D850005A53AE /* SearchAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAssembly.swift; sourceTree = "<group>"; };
+		DB3038652694D44F005A53AE /* SearchAppPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAppPresenter.swift; sourceTree = "<group>"; };
+		DB3038672694D482005A53AE /* SearchAppViewIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAppViewIO.swift; sourceTree = "<group>"; };
+		DB30386B2694D850005A53AE /* SearchAppAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAppAssembly.swift; sourceTree = "<group>"; };
 		E0E1D28F2034A3350011E01A /* iOSArchitecturesDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSArchitecturesDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0E1D2922034A3350011E01A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E0E1D2942034A3350011E01A /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -164,7 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				F8114FC022A3E5EE00102830 /* AppCellModel.swift */,
-				DB3038652694D44F005A53AE /* SearchPresenter.swift */,
+				DB3038652694D44F005A53AE /* SearchAppPresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -180,7 +180,7 @@
 		DB30386A2694D842005A53AE /* Assembly */ = {
 			isa = PBXGroup;
 			children = (
-				DB30386B2694D850005A53AE /* SearchAssembly.swift */,
+				DB30386B2694D850005A53AE /* SearchAppAssembly.swift */,
 			);
 			path = Assembly;
 			sourceTree = "<group>";
@@ -225,20 +225,20 @@
 		E0E1D2A52034A3560011E01A /* Flows */ = {
 			isa = PBXGroup;
 			children = (
-				E0E1D2A62034A36C0011E01A /* Search */,
+				E0E1D2A62034A36C0011E01A /* SearchApp */,
 				E0E1D2A72034A3780011E01A /* AppDetail */,
 			);
 			path = Flows;
 			sourceTree = "<group>";
 		};
-		E0E1D2A62034A36C0011E01A /* Search */ = {
+		E0E1D2A62034A36C0011E01A /* SearchApp */ = {
 			isa = PBXGroup;
 			children = (
 				DB30386A2694D842005A53AE /* Assembly */,
 				DB3038642694D439005A53AE /* Presenter */,
 				F8A97B3622498F0C00FB2C0E /* View */,
 			);
-			path = Search;
+			path = SearchApp;
 			sourceTree = "<group>";
 		};
 		E0E1D2A72034A3780011E01A /* AppDetail */ = {
@@ -370,7 +370,7 @@
 		F8A97B3622498F0C00FB2C0E /* View */ = {
 			isa = PBXGroup;
 			children = (
-				DB3038672694D482005A53AE /* SearchViewIO.swift */,
+				DB3038672694D482005A53AE /* SearchAppViewIO.swift */,
 				DB3038692694D4B5005A53AE /* Cells */,
 				E0E1D2942034A3350011E01A /* SearchViewController.swift */,
 				F8114FBD22A3DBF400102830 /* SearchView.swift */,
@@ -493,15 +493,15 @@
 			files = (
 				E0E1D399203AE62E0011E01A /* ITunesApp.swift in Sources */,
 				DB3038602694C82C005A53AE /* AppDetailHeaderView.swift in Sources */,
-				DB3038662694D44F005A53AE /* SearchPresenter.swift in Sources */,
-				DB30386C2694D850005A53AE /* SearchAssembly.swift in Sources */,
+				DB3038662694D44F005A53AE /* SearchAppPresenter.swift in Sources */,
+				DB30386C2694D850005A53AE /* SearchAppAssembly.swift in Sources */,
 				DB3038632694C838005A53AE /* AppDetailHeaderViewController.swift in Sources */,
 				0A67B61D26962692008D0933 /* AppWhatsNewView.swift in Sources */,
 				F8A97B352249898E00FB2C0E /* AppCell.swift in Sources */,
 				E0E1D387203AE45F0011E01A /* WebRequest.swift in Sources */,
 				F8A1E03C2248382F00FE6448 /* Monads.swift in Sources */,
 				E0E1D3D4203C4AA50011E01A /* UIColor+Extensions.swift in Sources */,
-				DB3038682694D482005A53AE /* SearchViewIO.swift in Sources */,
+				DB3038682694D482005A53AE /* SearchAppViewIO.swift in Sources */,
 				E0E1D3D1203C48D70011E01A /* AppDetailViewController.swift in Sources */,
 				E0E1D358203ADC590011E01A /* NetworkManager.swift in Sources */,
 				E0E1D39C203AE6420011E01A /* ITunesSong.swift in Sources */,

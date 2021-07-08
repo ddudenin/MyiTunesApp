@@ -1,5 +1,5 @@
 //
-//  SearchPresenter.swift
+//  SearchAppPresenter.swift
 //  iOSArchitecturesDemo
 //
 //  Created by v.prusakov on 7/6/21.
@@ -8,9 +8,9 @@
 
 import UIKit
 
-class SearchPresenter: SearchViewOutput {
+class SearchAppPresenter: SearchAppViewOutput {
     
-    weak var view: (SearchViewInput & UIViewController)!
+    weak var view: (SearchAppViewInput & UIViewController)!
     
     private let searchService = ITunesSearchService()
     

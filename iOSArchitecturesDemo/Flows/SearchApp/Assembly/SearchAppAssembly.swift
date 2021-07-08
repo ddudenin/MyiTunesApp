@@ -1,5 +1,5 @@
 //
-//  SearchAssembly.swift
+//  SearchAppAssembly.swift
 //  iOSArchitecturesDemo
 //
 //  Created by v.prusakov on 7/6/21.
@@ -8,10 +8,10 @@
 
 import UIKit
 
-enum SearchAssembly {
-    static func make() -> SearchViewController {
-        let viewController = SearchViewController()
-        let presenter = SearchPresenter()
+enum SearchAppAssembly {
+    static func make() -> SearchAppViewController {
+        let viewController = SearchAppViewController()
+        let presenter = SearchAppPresenter()
         
         viewController.output = presenter
         presenter.view = viewController

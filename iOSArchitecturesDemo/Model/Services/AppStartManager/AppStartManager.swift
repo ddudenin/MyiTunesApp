@@ -21,7 +21,7 @@ final class AppStartManager {
         softwearTab.title = "Softwear"
         softwearTab.image = UIImage(systemName: "app.fill")
 
-        let softwearVC = SearchAssembly.make()
+        let softwearVC = SearchAppAssembly.make()
         softwearVC.tabBarItem = softwearTab
         
         let musicTab = UITabBarItem()
