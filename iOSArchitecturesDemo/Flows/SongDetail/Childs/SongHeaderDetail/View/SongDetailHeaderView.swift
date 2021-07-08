@@ -7,12 +7,13 @@
 //
 
 import UIKit
+import AVFoundation
 #if DEBUG
 import SwiftUI
 #endif
 
 class SongDetailHeaderView: UIView {
-    private(set) lazy var iconImageView: UIImageView = {
+    private(set) lazy var artworkImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.backgroundColor = UIColor.secondarySystemFill
@@ -24,7 +25,7 @@ class SongDetailHeaderView: UIView {
         return imageView
     }()
     
-    private(set) lazy var titleLabel: UILabel = {
+    private(set) lazy var trackLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.preferredFont(forTextStyle: .title1)
@@ -33,7 +34,7 @@ class SongDetailHeaderView: UIView {
         return label
     }()
     
-    private(set) lazy var subtitleLabel: UILabel = {
+    private(set) lazy var artistLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.preferredFont(forTextStyle: .headline)
@@ -45,10 +46,16 @@ class SongDetailHeaderView: UIView {
     private(set) lazy var openButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Open", for: .normal)
+        button.setTitle("Play", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .systemBlue
+        
+        button.addTarget(self, action: #selector(play(_:)), for: .touchUpInside)
         return button
+    }()
+    
+    lazy var player: AVPlayer = {
+        return AVPlayer()
     }()
     
     
@@ -65,40 +72,53 @@ class SongDetailHeaderView: UIView {
     // MARK: - Private
     
     private func setupView() {
-        self.addSubview(openButton)
-        self.addSubview(titleLabel)
-        self.addSubview(subtitleLabel)
-        self.addSubview(iconImageView)
+        let playerLayer = AVPlayerLayer(player: player)
+        playerLayer.frame = self.bounds
+        self.layer.addSublayer(playerLayer)
         
+        self.addSubview(artworkImageView)
+        self.addSubview(trackLabel)
+        self.addSubview(artistLabel)
+        self.addSubview(openButton)
         
         NSLayoutConstraint.activate([
-            iconImageView.heightAnchor.constraint(equalToConstant: 68),
-            iconImageView.widthAnchor.constraint(equalToConstant: 68),
-            iconImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
-            iconImageView.bottomAnchor.constraint(lessThanOrEqualTo: self.bottomAnchor, constant: 16),
-            iconImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 16),
+            artworkImageView.heightAnchor.constraint(equalToConstant: 100),
+            artworkImageView.widthAnchor.constraint(equalToConstant: 100),
+            artworkImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
+            artworkImageView.bottomAnchor.constraint(lessThanOrEqualTo: self.bottomAnchor, constant: 16),
+            artworkImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 16),
             
-            titleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 16),
-            titleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
-            titleLabel.leadingAnchor.constraint(equalTo: iconImageView.trailingAnchor, constant: 16),
-            titleLabel.bottomAnchor.constraint(equalTo: subtitleLabel.topAnchor, constant: -4),
+            trackLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 16),
+            trackLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
+            trackLabel.leadingAnchor.constraint(equalTo: artworkImageView.trailingAnchor, constant: 16),
+            trackLabel.bottomAnchor.constraint(equalTo: artistLabel.topAnchor, constant: -4),
             
             
-            subtitleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
-            subtitleLabel.leadingAnchor.constraint(equalTo: iconImageView.trailingAnchor, constant: 16),
-            subtitleLabel.bottomAnchor.constraint(equalTo: openButton.topAnchor, constant: -16),
+            artistLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
+            artistLabel.leadingAnchor.constraint(equalTo: artworkImageView.trailingAnchor, constant: 16),
+            artistLabel.bottomAnchor.constraint(equalTo: openButton.topAnchor, constant: -16),
             
             openButton.widthAnchor.constraint(equalToConstant: 80),
-            openButton.leadingAnchor.constraint(equalTo: iconImageView.trailingAnchor, constant: 16),
+            openButton.leadingAnchor.constraint(equalTo: artworkImageView.trailingAnchor, constant: 16),
             openButton.heightAnchor.constraint(equalToConstant: 36),
             openButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -16)
         ])
     }
     
+    @IBAction func play(_ sender: UIButton!) {
+        if player.rate == 0 {
+            sender.setTitle("Pause", for: .normal)
+            player.play()
+        } else {
+            sender.setTitle("Play", for: .normal)
+            player.pause()
+        }
+    }
+    
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         
-        iconImageView.layer.borderColor = UIColor.systemGray2.cgColor
+        artworkImageView.layer.borderColor = UIColor.systemGray2.cgColor
     }
     
     override func layoutSubviews() {
@@ -114,11 +134,11 @@ class SongDetailHeaderView: UIView {
 struct SongDetailHeaderView_Preview: PreviewProvider {
     static var previews: some View {
         let view = SongDetailHeaderView()
-        view.titleLabel.text = "ВКонтакте. Ваша социальная сеть"
-        view.subtitleLabel.text = "Mail.ru"
+        view.trackLabel.text = "Огненная дуга"
+        view.artistLabel.text = "Кипелов"
         return UIPreviewView(view)
             .preferredColorScheme(.dark)
-            .previewLayout(.fixed(width: 375, height: 200))
+            .previewLayout(.fixed(width: 375, height: 150))
     }
 }
 

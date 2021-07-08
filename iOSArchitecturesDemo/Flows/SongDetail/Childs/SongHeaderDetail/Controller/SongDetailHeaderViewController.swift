@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class SongDetailHeaderViewController: UIViewController {
     
@@ -39,18 +40,26 @@ class SongDetailHeaderViewController: UIViewController {
     // MARK: - Private
     
     private func fillData() {
-        self.downloadIcon()
+        self.downloadArtwork()
+        self.prepareAudio()
         
-        self.songDetailView.titleLabel.text = song.trackName
-        self.songDetailView.subtitleLabel.text = song.artistName
+        self.songDetailView.trackLabel.text = song.trackName
+        self.songDetailView.artistLabel.text = song.artistName
     }
     
-    private func downloadIcon() {
+    private func downloadArtwork() {
         guard let url = self.song.artwork else { return }
         
         self.imageDownloader.getImage(fromUrl: url) { image, _ in
-            self.songDetailView.iconImageView.image = image
+            self.songDetailView.artworkImageView.image = image
         }
+    }
+    
+    private func prepareAudio() {
+        let videoURL = URL(string: song.audio)
+        let player = AVPlayer(url: videoURL!)
+        
+        self.songDetailView.player = player
     }
     
 }
