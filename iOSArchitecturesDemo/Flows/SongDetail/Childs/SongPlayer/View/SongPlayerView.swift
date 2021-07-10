@@ -48,7 +48,7 @@ class SongPlayerView: UIView {
         return AVPlayer()
     }()
     
-    private var timer = Timer()
+    private var timeObserverToken: Any?
     
     private let defaultTime = "00:00"
     private let playImage = UIImage(systemName: "play.circle.fill")
@@ -74,11 +74,11 @@ class SongPlayerView: UIView {
         self.layer.addSublayer(playerLayer)
         
         timeLabel.text = defaultTime
-
+        
         self.addSubview(playButton)
         self.addSubview(timeSlider)
         self.addSubview(timeLabel)
-     
+        
         NSLayoutConstraint.activate([
             playButton.widthAnchor.constraint(equalToConstant: 50),
             playButton.heightAnchor.constraint(equalToConstant: 50),
@@ -97,39 +97,44 @@ class SongPlayerView: UIView {
     }
     
     @objc func play(_ sender: UIButton!) {
-        if player.rate == 0 {
-            sender.setImage(pauseImage, for: .normal)
-            player.play()
-            timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.updateVideoPlayerSlider), userInfo: nil, repeats: true)
-        } else {
+        
+        switch player.timeControlStatus {
+        case .playing:
             sender.setImage(playImage, for: .normal)
             player.pause()
-            timer.invalidate()
+            removePeriodicTimeObserver()
+        case .paused:
+            sender.setImage(pauseImage, for: .normal)
+            player.play()
+            addPeriodicTimeObserver()
+        default:
+            return
         }
     }
     
     @objc func playerEndPlay() {
         playButton.setImage(playImage, for: .normal)
         player.seek(to: CMTime.zero)
-        timer.invalidate()
         timeSlider.value = 0
         timeLabel.text = defaultTime
+        removePeriodicTimeObserver()
     }
     
     @objc func onSliderValueChanged() {
         guard let duration = player.currentItem?.duration else { return }
         
-        let seconds = timeSlider.value * Float(CMTimeGetSeconds(duration))
+        let seconds = Double(timeSlider.value) * duration.seconds
+        let timeScale = CMTimeScale(NSEC_PER_SEC)
         
-        player.seek(to: CMTime(seconds: Double(seconds), preferredTimescale: .max))
-
+        player.seek(to: CMTime(seconds: seconds, preferredTimescale: timeScale))
+        
         updateVideoPlayerSlider()
     }
     
     
     @objc func updateVideoPlayerSlider() {
-        let currentTimeInSeconds = CMTimeGetSeconds(player.currentTime())
-
+        let currentTimeInSeconds = player.currentTime().seconds
+        
         let mins = currentTimeInSeconds / 60
         let secs = currentTimeInSeconds.truncatingRemainder(dividingBy: 60)
         let timeformatter = NumberFormatter()
@@ -150,19 +155,30 @@ class SongPlayerView: UIView {
                 return;
             }
             let currentTime = currentItem.currentTime()
-            timeSlider.value = Float(CMTimeGetSeconds(currentTime) / CMTimeGetSeconds(duration))
+            timeSlider.value = Float(currentTime.seconds / duration.seconds)
         }
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
+    private func addPeriodicTimeObserver() {
+        let timeScale = CMTimeScale(NSEC_PER_SEC)
+        let time = CMTime(seconds: 0.2, preferredTimescale: timeScale)
         
-        self.playButton.layer.cornerRadius = self.playButton.frame.height / 2
+        timeObserverToken = player.addPeriodicTimeObserver(forInterval: time,
+                                                           queue: .main) {
+            [weak self] _ in
+            self?.updateVideoPlayerSlider()
+        }
+    }
+    
+    private func removePeriodicTimeObserver() {
+        if let timeObserverToken = timeObserverToken {
+            player.removeTimeObserver(timeObserverToken)
+            self.timeObserverToken = nil
+        }
     }
 }
 
 #if DEBUG
-
 
 struct SongPlayerView_Preview: PreviewProvider {
     static var previews: some View {
