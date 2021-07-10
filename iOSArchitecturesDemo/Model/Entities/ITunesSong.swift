@@ -15,6 +15,8 @@ public struct ITunesSong: Codable {
     public var collectionName: String?
     public var artwork: String?
     public var audio: String
+    public var genre: String
+    public var release: String
     
     // MARK: - Codable
     
@@ -24,6 +26,8 @@ public struct ITunesSong: Codable {
         case collectionName = "collectionName"
         case artwork = "artworkUrl100"
         case audio = "previewUrl"
+        case genre = "primaryGenreName"
+        case release = "releaseDate"
     }
     
     // MARK: - Init
@@ -32,11 +36,15 @@ public struct ITunesSong: Codable {
                   artistName: String?,
                   collectionName: String?,
                   artwork: String?,
-                  audio: String) {
+                  audio: String,
+                  genre: String,
+                  releaseDate: String) {
         self.trackName = trackName
         self.artistName = artistName
         self.collectionName = collectionName
         self.artwork = artwork
         self.audio = audio
+        self.genre = genre
+        self.release = releaseDate
     }
 }

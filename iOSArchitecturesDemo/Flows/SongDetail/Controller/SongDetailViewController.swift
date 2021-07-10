@@ -12,7 +12,7 @@ final class SongDetailViewController: UIViewController {
     
     public var song: ITunesSong!
     lazy var headerViewController = SongDetailHeaderViewController(song: song)
-    //lazy var whatsNewViewController = AppWhatsNewViewController(app: app)
+    lazy var playerViewController = SongDetailPlayerViewController(song: song)
     
     // MARK: - Lifecycle
 
@@ -28,7 +28,7 @@ final class SongDetailViewController: UIViewController {
         self.view.backgroundColor = .systemBackground
         self.configureNavigationController()
         self.addHeaderViewController()
-        //self.addDescriptionViewController()
+        self.addPlayerViewController()
     }
     
     private func configureNavigationController() {
@@ -51,19 +51,18 @@ final class SongDetailViewController: UIViewController {
         ])
     }
     
-    /*private func addDescriptionViewController() {
-        self.addChild(whatsNewViewController)
-        let descriptionView = whatsNewViewController.view!
-        self.view.addSubview(descriptionView)
-        whatsNewViewController.didMove(toParent: self)
+    private func addPlayerViewController() {
+        self.addChild(playerViewController)
+        let playerView = playerViewController.view!
+        self.view.addSubview(playerView)
+        playerViewController.didMove(toParent: self)
         
-        descriptionView.translatesAutoresizingMaskIntoConstraints = false
+        playerView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            descriptionView.topAnchor.constraint(equalTo: self.headerViewController.view.bottomAnchor),
-            descriptionView.leftAnchor.constraint(equalTo: self.view.leftAnchor),
-            descriptionView.rightAnchor.constraint(equalTo: self.view.rightAnchor),
+            playerView.topAnchor.constraint(equalTo: self.headerViewController.view.bottomAnchor),
+            playerView.leftAnchor.constraint(equalTo: self.view.leftAnchor),
+            playerView.rightAnchor.constraint(equalTo: self.view.rightAnchor),
         ])
-    }*/
-
+    }
 }

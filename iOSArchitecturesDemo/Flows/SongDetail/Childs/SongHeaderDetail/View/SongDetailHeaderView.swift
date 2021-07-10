@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import AVFoundation
 #if DEBUG
 import SwiftUI
 #endif
@@ -38,26 +37,19 @@ class SongDetailHeaderView: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.preferredFont(forTextStyle: .headline)
-        label.numberOfLines = 3
+        label.numberOfLines = 1
         label.textColor = .secondaryLabel
         return label
     }()
     
-    private(set) lazy var openButton: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Play", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .systemBlue
-        
-        button.addTarget(self, action: #selector(play(_:)), for: .touchUpInside)
-        return button
+    private(set) lazy var genreLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.preferredFont(forTextStyle: .caption1)
+        label.numberOfLines = 1
+        label.textColor = .secondaryLabel
+        return label
     }()
-    
-    lazy var player: AVPlayer = {
-        return AVPlayer()
-    }()
-    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -72,20 +64,16 @@ class SongDetailHeaderView: UIView {
     // MARK: - Private
     
     private func setupView() {
-        let playerLayer = AVPlayerLayer(player: player)
-        playerLayer.frame = self.bounds
-        self.layer.addSublayer(playerLayer)
-        
         self.addSubview(artworkImageView)
         self.addSubview(trackLabel)
         self.addSubview(artistLabel)
-        self.addSubview(openButton)
-        
+        self.addSubview(genreLabel)
+  
         NSLayoutConstraint.activate([
             artworkImageView.heightAnchor.constraint(equalToConstant: 100),
             artworkImageView.widthAnchor.constraint(equalToConstant: 100),
             artworkImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
-            artworkImageView.bottomAnchor.constraint(lessThanOrEqualTo: self.bottomAnchor, constant: 16),
+            artworkImageView.bottomAnchor.constraint(lessThanOrEqualTo: self.bottomAnchor, constant: -16),
             artworkImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 16),
             
             trackLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 16),
@@ -96,23 +84,11 @@ class SongDetailHeaderView: UIView {
             
             artistLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
             artistLabel.leadingAnchor.constraint(equalTo: artworkImageView.trailingAnchor, constant: 16),
-            artistLabel.bottomAnchor.constraint(equalTo: openButton.topAnchor, constant: -16),
+            artistLabel.bottomAnchor.constraint(equalTo: genreLabel.topAnchor, constant: -4),
             
-            openButton.widthAnchor.constraint(equalToConstant: 80),
-            openButton.leadingAnchor.constraint(equalTo: artworkImageView.trailingAnchor, constant: 16),
-            openButton.heightAnchor.constraint(equalToConstant: 36),
-            openButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -16)
+            genreLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
+            genreLabel.leadingAnchor.constraint(equalTo: artworkImageView.trailingAnchor, constant: 16),
         ])
-    }
-    
-    @IBAction func play(_ sender: UIButton!) {
-        if player.rate == 0 {
-            sender.setTitle("Pause", for: .normal)
-            player.play()
-        } else {
-            sender.setTitle("Play", for: .normal)
-            player.pause()
-        }
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -120,22 +96,16 @@ class SongDetailHeaderView: UIView {
         
         artworkImageView.layer.borderColor = UIColor.systemGray2.cgColor
     }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        self.openButton.layer.cornerRadius = self.openButton.frame.height / 2
-    }
 }
 
 #if DEBUG
-
 
 struct SongDetailHeaderView_Preview: PreviewProvider {
     static var previews: some View {
         let view = SongDetailHeaderView()
         view.trackLabel.text = "Огненная дуга"
         view.artistLabel.text = "Кипелов"
+        view.genreLabel.text = "Рок"
         return UIPreviewView(view)
             .preferredColorScheme(.dark)
             .previewLayout(.fixed(width: 375, height: 150))
