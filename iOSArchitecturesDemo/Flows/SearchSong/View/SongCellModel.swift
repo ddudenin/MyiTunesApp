@@ -18,7 +18,7 @@ final class SongCellModelFactory {
     
     static func cellModel(from model: ITunesSong) -> SongCellModel {
         return SongCellModel(title: model.trackName,
-                            subtitle: model.artistName,
-                            artwork: model.collectionName)
+                             subtitle: model.artistName,
+                             artwork: model.collectionName)
     }
 }

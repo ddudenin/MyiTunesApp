@@ -16,7 +16,7 @@ final class SearchSongViewController: UIViewController {
         return self.view as! SearchView
     }
     
-    private var searchResults = [ITunesSong]()
+    private var searchResults = [SongCellModel]()
     
     private struct Constants {
         static let reuseIdentifier = "SongCell"
@@ -29,7 +29,7 @@ final class SearchSongViewController: UIViewController {
     override func loadView() {
         self.view = SearchView()
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.prefersLargeTitles = true
@@ -53,8 +53,8 @@ extension SearchSongViewController: SearchSongViewInput {
         UIApplication.shared.isNetworkActivityIndicatorVisible = show
     }
     
-    func setSearchSongs(_ items: [ITunesSong]) {
-        self.searchResults = items
+    func setSearchSongs(_ cellModels: [SongCellModel]) {
+        self.searchResults = cellModels
         
         self.searchView.tableView.reloadData()
         self.searchView.tableView.isHidden = false
@@ -89,8 +89,7 @@ extension SearchSongViewController: UITableViewDataSource {
         guard let cell = dequeuedCell as? SongCell else {
             return dequeuedCell
         }
-        let song = self.searchResults[indexPath.row]
-        let cellModel = SongCellModelFactory.cellModel(from: song)
+        let cellModel = self.searchResults[indexPath.row]
         cell.configure(with: cellModel)
         return cell
     }

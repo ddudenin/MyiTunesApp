@@ -10,7 +10,7 @@ import UIKit
 
 protocol SearchSongViewInput: AnyObject {
     
-    func setSearchSongs(_ items: [ITunesSong])
+    func setSearchSongs(_ cellModels: [SongCellModel])
     
     func throbber(show: Bool)
     func showError(error: Error)
@@ -21,6 +21,6 @@ protocol SearchSongViewInput: AnyObject {
 protocol SearchSongViewOutput: AnyObject {
     func viewDidSearch(with queury: String)
     
-    func viewDidSelectSong(_ song: ITunesSong)
+    func viewDidSelectSong(_ cellModel: SongCellModel)
 }
 
