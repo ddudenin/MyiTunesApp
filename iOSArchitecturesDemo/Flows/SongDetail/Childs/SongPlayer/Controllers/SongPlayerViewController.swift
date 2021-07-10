@@ -1,5 +1,5 @@
 //
-//  SongDetailPlayerViewController.swift
+//  SongPlayerViewController.swift
 //  iOSArchitecturesDemo
 //
 //  Created by Дмитрий Дуденин on 09.07.2021.
@@ -9,12 +9,12 @@
 import UIKit
 import AVFoundation
 
-class SongDetailPlayerViewController: UIViewController {
+class SongPlayerViewController: UIViewController {
     
     private let song: ITunesSong
     
-    private var songDetailView: SongDetailPlayerView {
-        return self.view as! SongDetailPlayerView
+    private var songDetailView: SongPlayerView {
+        return self.view as! SongPlayerView
     }
     
     init(song: ITunesSong) {
@@ -23,7 +23,7 @@ class SongDetailPlayerViewController: UIViewController {
     }
     
     override func loadView() {
-        self.view = SongDetailPlayerView()
+        self.view = SongPlayerView()
     }
     
     required init?(coder: NSCoder) {

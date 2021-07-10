@@ -1,5 +1,5 @@
 //
-//  SongDetailPlayerView.swift
+//  SongPlayerView.swift
 //  iOSArchitecturesDemo
 //
 //  Created by Дмитрий Дуденин on 09.07.2021.
@@ -12,7 +12,7 @@ import AVFoundation
 import SwiftUI
 #endif
 
-class SongDetailPlayerView: UIView {
+class SongPlayerView: UIView {
     
     private(set) lazy var playButton: UIButton = {
         let button = UIButton()
@@ -164,9 +164,9 @@ class SongDetailPlayerView: UIView {
 #if DEBUG
 
 
-struct SongDetailPlayerView_Preview: PreviewProvider {
+struct SongPlayerView_Preview: PreviewProvider {
     static var previews: some View {
-        let view = SongDetailPlayerView()
+        let view = SongPlayerView()
         view.timeLabel.text = "02:00"
         view.timeSlider.value = 0.5
         return Group {

@@ -12,7 +12,7 @@ final class SongDetailViewController: UIViewController {
     
     public var song: ITunesSong!
     lazy var headerViewController = SongDetailHeaderViewController(song: song)
-    lazy var playerViewController = SongDetailPlayerViewController(song: song)
+    lazy var playerViewController = SongPlayerViewController(song: song)
     
     // MARK: - Lifecycle
 
