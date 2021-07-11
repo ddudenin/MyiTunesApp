@@ -43,7 +43,7 @@ class SongDetailHeaderViewController: UIViewController {
 
         self.songDetailView.trackLabel.text = song.trackName
         self.songDetailView.artistLabel.text = song.artistName
-        self.songDetailView.genreLabel.text = song.genre + " - " + getYear(from: song.release)
+        self.songDetailView.genreLabel.text = song.genre + " • " + getYear(from: song.release)
     }
     
     private func downloadArtwork() {

@@ -27,7 +27,8 @@ class AppScreenshotsView: UIView {
         layout.scrollDirection = .horizontal
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.collectionViewLayout = layout
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.showsHorizontalScrollIndicator = false
         collectionView.backgroundColor = .white
         collectionView.register(ScreenshotCell.self, forCellWithReuseIdentifier: ScreenshotCell.reuseId)
         collectionView.contentInset = .init(top: 0, left: 16, bottom: 0, right: 16)
@@ -98,7 +99,36 @@ extension AppScreenshotsView : UICollectionViewDataSource {
 
 extension AppScreenshotsView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return .init(width: 200, height: 300)
+        
+        guard let image = self.screenshots[indexPath.row] else {
+            return .init(width: 200, height: 300)
+        }
+        let origSize = image.size
+        let aspectRatio = origSize.height / origSize.width
+        
+        let insets = collectionView.contentInset
+        
+        let insetsHSpace = insets.right + insets.left
+        let insetsVSpace = insets.top + insets.bottom
+        
+        var width = collectionView.bounds.width
+        
+        width -= width / 2 - insetsHSpace
+        
+        var height = width * aspectRatio
+        
+        let heightLimit = collectionView.bounds.height - insetsVSpace
+        
+        if height > heightLimit {
+            height = heightLimit
+            width = height / aspectRatio
+        }
+        
+        return .init(width: width, height: height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
     }
 }
 
