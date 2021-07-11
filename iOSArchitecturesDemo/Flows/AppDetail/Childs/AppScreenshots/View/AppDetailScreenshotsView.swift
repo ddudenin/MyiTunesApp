@@ -11,6 +11,10 @@ import UIKit
 import SwiftUI
 #endif
 
+protocol AppScreenshotsViewDelegate: AnyObject {
+    func showScreenshot(at index: Int)
+}
+
 class AppScreenshotsView: UIView {
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -36,6 +40,7 @@ class AppScreenshotsView: UIView {
     }()
     
     var screenshots = [UIImage?]()
+    weak var showDelegate: AppScreenshotsViewDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -129,6 +134,7 @@ extension AppScreenshotsView: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
+        self.showDelegate?.showScreenshot(at: indexPath.row)
     }
 }
 

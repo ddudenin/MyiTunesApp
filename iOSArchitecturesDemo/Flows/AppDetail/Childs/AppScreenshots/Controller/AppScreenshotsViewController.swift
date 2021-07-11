@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol AppScreenshotsViewControllerDelegate: AnyObject {
+    func appScreenshotsView(_ view: UIViewController, didShowImageAt index: Int)
+}
+
 class AppScreenshotsViewController: UIViewController {
     
     private let app: ITunesApp
@@ -17,9 +21,13 @@ class AppScreenshotsViewController: UIViewController {
         return self.view as! AppScreenshotsView
     }
     
+    weak var appDelegate: AppScreenshotsViewControllerDelegate?
+    
     init(app: ITunesApp) {
         self.app = app
         super.init(nibName: nil, bundle: nil)
+        
+        self.appScreenshotsView.showDelegate = self
     }
     
     override func loadView() {
@@ -50,4 +58,11 @@ class AppScreenshotsViewController: UIViewController {
             }
         }
     }
+}
+
+extension AppScreenshotsViewController: AppScreenshotsViewDelegate {
+    func showScreenshot(at index: Int) {
+        self.appDelegate?.appScreenshotsView(self, didShowImageAt: index)
+    }
+    
 }

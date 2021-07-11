@@ -89,6 +89,8 @@ final class AppDetailViewController: UIViewController {
     }
     
     private func addScreenshotsViewController() {
+        screenshotsViewController.appDelegate = self
+        
         self.addChild(screenshotsViewController)
         let screenshotView = screenshotsViewController.view!
         self.scrollView.addSubview(screenshotView)
@@ -103,5 +105,12 @@ final class AppDetailViewController: UIViewController {
             screenshotView.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor),
             screenshotView.heightAnchor.constraint(equalToConstant: 350)
         ])
+    }
+}
+
+extension AppDetailViewController: AppScreenshotsViewControllerDelegate {
+    func appScreenshotsView(_ view: UIViewController, didShowImageAt index: Int) {
+        print("Show image at \(index + 1) index")
+        //self.navigationController?.pushViewController(UIViewController(), animated: true)
     }
 }
