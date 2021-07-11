@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A1E56E5269B30950006D164 /* ScreenshotsPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1E56E4269B30950006D164 /* ScreenshotsPageViewController.swift */; };
 		0A1E5C272698ED30005A305A /* SongPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1E5C262698ED30005A305A /* SongPlayerViewController.swift */; };
 		0A1E5C292698ED4F005A305A /* SongPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1E5C282698ED4F005A305A /* SongPlayerView.swift */; };
 		0A2439A526978670000F4A66 /* SearchSongViewIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2439A426978670000F4A66 /* SearchSongViewIO.swift */; };
@@ -57,6 +58,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0A1E56E4269B30950006D164 /* ScreenshotsPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotsPageViewController.swift; sourceTree = "<group>"; };
 		0A1E5C262698ED30005A305A /* SongPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongPlayerViewController.swift; sourceTree = "<group>"; };
 		0A1E5C282698ED4F005A305A /* SongPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongPlayerView.swift; sourceTree = "<group>"; };
 		0A2439A426978670000F4A66 /* SearchSongViewIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSongViewIO.swift; sourceTree = "<group>"; };
@@ -319,6 +321,7 @@
 			isa = PBXGroup;
 			children = (
 				0A81692D269A2190001E7C3F /* AppScreenshotsViewController.swift */,
+				0A1E56E4269B30950006D164 /* ScreenshotsPageViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -724,6 +727,7 @@
 				0A2439B0269788BC000F4A66 /* SearchSongPresenter.swift in Sources */,
 				0A8169122699CD30001E7C3F /* SearchSongRouterIO.swift in Sources */,
 				F8A1E03C2248382F00FE6448 /* Monads.swift in Sources */,
+				0A1E56E5269B30950006D164 /* ScreenshotsPageViewController.swift in Sources */,
 				E0E1D3D4203C4AA50011E01A /* UIColor+Extensions.swift in Sources */,
 				0A816930269A21F8001E7C3F /* ScreenshotCell.swift in Sources */,
 				DB3038682694D482005A53AE /* SearchAppViewIO.swift in Sources */,

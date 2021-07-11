@@ -9,7 +9,7 @@
 import UIKit
 
 protocol AppScreenshotsViewControllerDelegate: AnyObject {
-    func appScreenshotsView(_ view: UIViewController, didShowImageAt index: Int)
+    func appScreenshotsView(_ view: UIViewController, _ images: [UIImage?], didShowImageAt index: Int)
 }
 
 class AppScreenshotsViewController: UIViewController {
@@ -62,7 +62,7 @@ class AppScreenshotsViewController: UIViewController {
 
 extension AppScreenshotsViewController: AppScreenshotsViewDelegate {
     func showScreenshot(at index: Int) {
-        self.appDelegate?.appScreenshotsView(self, didShowImageAt: index)
+        self.appDelegate?.appScreenshotsView(self, self.appScreenshotsView.screenshots, didShowImageAt: index)
     }
     
 }

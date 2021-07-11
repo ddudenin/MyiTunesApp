@@ -109,8 +109,9 @@ final class AppDetailViewController: UIViewController {
 }
 
 extension AppDetailViewController: AppScreenshotsViewControllerDelegate {
-    func appScreenshotsView(_ view: UIViewController, didShowImageAt index: Int) {
-        print("Show image at \(index + 1) index")
-        //self.navigationController?.pushViewController(UIViewController(), animated: true)
+    func appScreenshotsView(_ view: UIViewController, _ images: [UIImage?], didShowImageAt index: Int) {
+        let pageVC = ScreenshotsPageViewController(index: index, images: images)
+ 
+        self.navigationController?.pushViewController(pageVC, animated: true)
     }
 }
