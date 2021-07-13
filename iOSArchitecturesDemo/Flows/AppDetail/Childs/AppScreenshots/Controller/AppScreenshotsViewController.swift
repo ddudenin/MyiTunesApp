@@ -43,7 +43,6 @@ class AppScreenshotsViewController: UIViewController {
         self.fillData()
     }
     
-    
     // MARK: - Private
     
     private func fillData() {
@@ -64,5 +63,4 @@ extension AppScreenshotsViewController: AppScreenshotsViewDelegate {
     func showScreenshot(at index: Int) {
         self.appDelegate?.appScreenshotsView(self, self.appScreenshotsView.screenshots, didShowImageAt: index)
     }
-    
 }

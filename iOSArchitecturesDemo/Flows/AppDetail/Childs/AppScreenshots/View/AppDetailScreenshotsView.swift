@@ -109,7 +109,21 @@ extension AppScreenshotsView: UICollectionViewDelegateFlowLayout {
             return .init(width: 200, height: 300)
         }
         let origSize = image.size
-        let aspectRatio = origSize.height / origSize.width
+        
+        if origSize.height > origSize.width {
+            return getVerticalSize(collectionView, origSize)
+        } else {
+            return getHorizontalSize(collectionView, origSize)
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        self.showDelegate?.showScreenshot(at: indexPath.row)
+    }
+    
+    private func getVerticalSize(_ collectionView: UICollectionView, _ imageSize: CGSize) -> CGSize {
+        let aspectRatio = imageSize.height / imageSize.width
         
         let insets = collectionView.contentInset
         
@@ -132,9 +146,26 @@ extension AppScreenshotsView: UICollectionViewDelegateFlowLayout {
         return .init(width: width, height: height)
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    private func getHorizontalSize(_ collectionView: UICollectionView, _ imageSize: CGSize) -> CGSize {
+        let aspectRatio = imageSize.width / imageSize.height
         
-        self.showDelegate?.showScreenshot(at: indexPath.row)
+        let insets = collectionView.contentInset
+        
+        let insetsHSpace = insets.right + insets.left
+        let insetsVSpace = insets.top + insets.bottom
+        
+        var height = collectionView.bounds.height - insetsVSpace
+        
+        var width = height * aspectRatio
+        
+        let widthLimit = collectionView.bounds.width - insetsHSpace
+        
+        if width > widthLimit {
+            width = widthLimit
+            height = width / aspectRatio
+        }
+        
+        return .init(width: width, height: height)
     }
 }
 
