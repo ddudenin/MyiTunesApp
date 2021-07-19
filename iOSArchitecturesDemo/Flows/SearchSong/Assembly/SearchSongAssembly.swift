@@ -12,9 +12,18 @@ enum SearchSongAssembly {
     static func make() -> SearchSongViewController {
         let viewController = SearchSongViewController()
         let presenter = SearchSongPresenter()
+        let interactor = SearchSongInteractor(searchService: ITunesSearchService())
+        let router = SearchSongRouter()
+        
+        router.viewController = viewController
         
         viewController.output = presenter
+        
+        presenter.interactor = interactor
+        presenter.router = router
         presenter.view = viewController
+        
+        interactor.output = presenter
         
         return viewController
     }

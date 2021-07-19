@@ -8,51 +8,46 @@
 
 import UIKit
 
-class SearchSongPresenter: SearchSongViewOutput {
+final class SearchSongPresenter {
     
-    weak var view: (SearchSongViewInput & UIViewController)!
+    var interactor: SearchSongInteractorInput!
+    var router: SearchSongRouterInput!
+    weak var view: SearchSongViewInput!
     
-    private let searchService = ITunesSearchService()
-    
-    // MARK: - SearchViewOutput
+    var songs: [ITunesSong] = []
+}
+
+// MARK: - SearchViewOutput
+extension SearchSongPresenter: SearchSongViewOutput {
     
     func viewDidSearch(with queury: String) {
-        self.requestSongs(with: queury)
-    }
-    
-    func viewDidSelectSong(_ song: ITunesSong) {
-        self.openSongDetails(with: song)
-    }
-    
-    // MARK: - Private
-    
-    private func requestSongs(with query: String) {
         self.view.throbber(show: true)
-        self.view.setSearchSongs([])
+        self.interactor.requestSongs(for: queury)
+    }
+    
+    func viewDidSelectSong(_ cellModel: SongCellModel) {
+        guard let song = self.songs.first(where: { $0.trackName == cellModel.title }) else { return }
+        self.router.openSongDetail(for: song)
+    }
+}
+
+extension SearchSongPresenter: SearchSongInteractorOutput {
+    func recivedSongs(_ songs: [ITunesSong]) {
+        self.view.throbber(show: false)
         
-        self.searchService.getSongs(forQuery: query) { [weak self] result in
-            guard let self = self else { return }
-            self.view.throbber(show: false)
-            result
-                .withValue { songs in
-                    guard !songs.isEmpty else {
-                        self.view.setSearchSongs([])
-                        self.view.showNoResults()
-                        return
-                    }
-                    self.view.hideNoResults()
-                    self.view.setSearchSongs(songs)
-                }
-                .withError {
-                    self.view.showError(error: $0)
-                }
+        self.songs = songs
+        
+        if songs.isEmpty {
+            self.view.showNoResults()
+        } else {
+            self.view.hideNoResults()
         }
+        let models = songs.map { SongCellModelFactory.cellModel(from: $0) }
+        self.view.setSearchSongs(models)
     }
     
-    private func openSongDetails(with song: ITunesSong) {
-        let songDetaillViewController = SongDetailViewController()
-        songDetaillViewController.song = song
-        view.navigationController?.pushViewController(songDetaillViewController, animated: true)
+    func recivedError(_ error: Error) {
+        self.view.throbber(show: false)
+        self.view.showNoResults()
     }
-    
 }

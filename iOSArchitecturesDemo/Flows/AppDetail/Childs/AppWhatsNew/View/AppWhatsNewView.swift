@@ -44,10 +44,13 @@ class AppWhatsNewView: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.preferredFont(forTextStyle: .body)
-        label.numberOfLines = 5
+        label.numberOfLines = defaultNumOfLines
         label.textColor = .label
         return label
     }()
+    
+    private var isExpanded = false
+    private var defaultNumOfLines = 5
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -66,6 +69,9 @@ class AppWhatsNewView: UIView {
         self.addSubview(versionLabel)
         self.addSubview(dateLabel)
         self.addSubview(discriptionLabel)
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tappedEvent(tapGestureRecognizer:)))
+        self.addGestureRecognizer(tapGesture)
 
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 4),
@@ -95,6 +101,16 @@ class AppWhatsNewView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
+    }
+    
+    @objc private func tappedEvent(tapGestureRecognizer: UITapGestureRecognizer) {
+        if self.isExpanded {
+            self.isExpanded = false
+            discriptionLabel.numberOfLines = defaultNumOfLines
+        } else {
+            self.isExpanded = true
+            discriptionLabel.numberOfLines = 0
+        }
     }
 }
 

@@ -24,7 +24,7 @@ public struct ITunesApp: Codable {
     public let screenshotUrls: [String]
     public let version: String
     public let currentVersionReleaseDate: String
-    public let releaseNotes: String
+    public let releaseNotes: String?
     
     // MARK: - Codable
     
@@ -58,7 +58,7 @@ public struct ITunesApp: Codable {
         self.screenshotUrls = (try? container.decode([String].self, forKey: .screenshotUrls)) ?? []
         self.version = try container.decode(String.self, forKey: .version)
         self.currentVersionReleaseDate = try container.decode(String.self, forKey: .currentVersionReleaseDate)
-        self.releaseNotes = try container.decode(String.self, forKey: .releaseNotes)
+        self.releaseNotes = try? container.decode(String.self, forKey: .releaseNotes)
     }
     
     // MARK: - Init

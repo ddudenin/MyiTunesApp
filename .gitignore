@@ -18,6 +18,27 @@ DerivedData/
 *.perspectivev3
 !default.perspectivev3
 
+# Xcode
+.DS_Store
+#build file
+build/
+#personal settings
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+#xcode state
+*.perspectivev3
+!default.perspectivev3
+*.xcworkspace
+!default.xcworkspace
+xcuserdata
+profile
+*.moved-aside
+DerivedData
+.idea/
 ## Obj-C/Swift specific
 *.hmap
 
@@ -36,7 +57,7 @@ playground.xcworkspace
 # CocoaPods
 # Pods/
 # Add this line if you want to avoid checking in source code from the Xcode workspace
-# *.xcworkspace
+*.xcworkspace
 
 # Carthage
 # Carthage/Checkouts
