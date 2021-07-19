@@ -17,8 +17,23 @@ final class AppStartManager {
     }
     
     func start() {
-        let rootVC = SearchViewController()
+        let softwearTab = UITabBarItem()
+        softwearTab.title = "Softwear"
+        softwearTab.image = UIImage(systemName: "app.fill")
+
+        let softwearVC = SearchAppAssembly.make()
+        softwearVC.tabBarItem = softwearTab
+        
+        let musicTab = UITabBarItem()
+        musicTab.title = "Music"
+        musicTab.image = UIImage(systemName: "music.note.list")
+
+        let musicVC = SearchSongAssembly.make()
+        musicVC.tabBarItem = musicTab
+        
+        let rootVC = UITabBarController()
         rootVC.navigationItem.title = "Search via iTunes"
+        rootVC.viewControllers = [softwearVC, musicVC]
         
         let navVC = self.configuredNavigationController
         navVC.viewControllers = [rootVC]
